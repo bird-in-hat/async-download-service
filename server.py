@@ -26,8 +26,7 @@ async def archivate(request):
         f"cd {archive_path} && zip - *",
         stdout=asyncio.subprocess.PIPE,
         stderr=asyncio.subprocess.PIPE)
-    # buffer_size = 500 * 1024
-    buffer_size = 30 * 1024
+    buffer_size = 500 * 1024
 
     try:
         # Отправляет клиенту HTTP заголовки

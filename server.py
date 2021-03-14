@@ -51,14 +51,8 @@ async def archivate(request):
         return web.HTTPServerError()
     finally:
         if proc.returncode != 0:
-            try:
-                await asyncio.create_subprocess_exec("./rkill.sh", f"{proc.pid}")
-                # need to make rkill.sh executable
-                # chmod +x rkill.sh
-            except OSError as e:
-                if "Permission denied" in e.strerror:
-                    proc.kill()
-                    await proc.communicate()
+            proc.kill()
+            await proc.communicate()
 
 
 async def handle_index_page(request):

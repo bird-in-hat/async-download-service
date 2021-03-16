@@ -43,7 +43,7 @@ async def archivate(request):
     except asyncio.CancelledError:
         response.force_close()
         logging.error('Download was cancelled')
-        return web.HTTPServerError()
+        raise
     except Exception as e:
         response.force_close()
         logging.error('Server error ' + str(e))
